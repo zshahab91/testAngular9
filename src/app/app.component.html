@@ -1,0 +1,227 @@
+<div class="container main-container">
+  <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
+
+    
+    <ng-wizard-step [title]="'Step 1'" [description]="'Project Details'">
+      <div class="content-step">
+        <h2>Project Details</h2>
+        <div *ngIf="msg !== null" class="red">{{msg}}</div>
+        <form #formStepOne="ngForm" (ngSubmit)="onSubmitStepOne(formStepOne)" novalidate>
+          
+          <div class="form-group row">
+            <label for="projectName" class="col-sm-2 col-form-label"
+              >Project Name</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="projectName"
+                placeholder=""
+                name="projectName"
+                ngModel
+                required
+                minlength="1"
+                #projectName="ngModel"
+              />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="projectOwner" class="col-sm-2 col-form-label"
+              >Project Owner</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="projectOwner"
+                placeholder=""
+                name="projectOwner"
+                ngModel
+                required
+                minlength="1"
+                #projectOwner="ngModel"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="customerName" class="col-sm-2 col-form-label"
+              >Customer Name</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="customerName"
+                placeholder=""
+                name="customerName"
+                ngModel
+                required
+                minlength="1"
+                #customerName="ngModel"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="contactPhone" class="col-sm-2 col-form-label"
+              >Contact Phone</label
+            >
+            <div class="input-group col-sm-10">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <fa-icon [icon]="faPhone"></fa-icon>
+                </div>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                id="contactPhone"
+                placeholder=""
+                name="contactPhone"
+                ngModel
+                required
+                minlength="11"
+                maxLength="11"
+                #contactPhone="ngModel"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="emailAddress" class="col-sm-2 col-form-label"
+              >Email Address</label
+            >
+            <div class="input-group col-sm-10">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  @
+                </div>
+              </div>
+              <input
+                type="email"
+                class="form-control"
+                id="emailAddress"
+                placeholder=""
+                name="emailAddress"
+                ngModel
+                required
+                minlength="1"
+                #emailAddress="ngModel"
+                [email]="true"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="companySite" class="col-sm-2 col-form-label"
+              >Company Site</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="companySite"
+                placeholder=""
+                name="companySite"
+                ngModel
+                required
+                minlength="1"
+                #companySite="ngModel"
+              />
+            </div>
+          </div>
+          <button class="btn btn-info right">NEXT STEP</button>
+        </form>
+      </div>
+    </ng-wizard-step>
+
+    <ng-wizard-step [title]="'Step 2'" [description]="'Project Settings'">
+      <div class="content-step">
+        <h2>Project Settings</h2>
+        <div *ngIf="msg !== null" class="red">{{msg}}</div>
+        <form #formStepTwo="ngForm" (ngSubmit)="onSubmitStepTwo(formStepTwo)" novalidate>
+          <div class="form-group row">
+            <label for="emailAddress" class="col-sm-2 col-form-label"
+              >Email Address</label
+            >
+            <div class="input-group col-sm-10">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  @
+                </div>
+              </div>
+              <input
+                type="email"
+                class="form-control"
+                id="emailAddress"
+                placeholder=""
+                name="emailAddress"
+                ngModel
+                required
+                minlength="1"
+                #emailAddress="ngModel"
+                [email]="true"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="language" class="col-sm-2 col-form-label"
+              >Language</label
+            >
+            <div class="col-sm-10">
+              <select class="form-control"
+              name="language"
+              ngModel
+              required
+              #language="ngModel"
+              >
+                <option disabled>Select Language</option>
+                <option *ngFor="let ln of languages">{{ln}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="communications" class="col-sm-2 col-form-label"
+              >Communications</label
+            >
+            <div class="col-sm-10">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="email"
+                name="communicationTypeEmail"
+                ngModel
+                required
+                #communicationTypeEmail="ngModel">
+                <label class="form-check-label" for="inlineCheckbox1">Email</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="sms"
+                name="communicationTypeSMS"
+                ngModel
+                required
+                #communicationTypeSMS="ngModel">
+                <label class="form-check-label" for="inlineCheckbox2">SMS</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="phone" 
+                name="communicationTypePhone"
+                ngModel
+                required
+                #communicationTypePhone="ngModel">
+                <label class="form-check-label" for="inlineCheckbox3">Phone</label>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-secondary left" (click)="goPrevious">PREVIOUS</button>
+          <button class="btn btn-info right">NEXT STEP</button>
+        </form>
+      </div>
+    </ng-wizard-step>
+
+    <ng-wizard-step [title]="'Step 3'" [description]="'Delivery Details'">
+      <span>Step 3 content</span>
+    </ng-wizard-step>
+
+    <ng-wizard-step [title]="'Step 4'" [description]="'Review and Submit'">
+      <span>Step 4 content</span>
+    </ng-wizard-step>
+  </ng-wizard>
+</div>
