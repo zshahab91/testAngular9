@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { increment, decrement, reset } from './stores/actions/counter';
+import { saveData } from './stores/actions/data';
 import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-root',
@@ -18,8 +19,9 @@ export class AppComponent {
   isCompeleteStepThree: boolean = false;
 
   count$: Observable<number>;
+  data$: Observable<null>;
   config = {
-    selected: 1,
+    selected: 0,
     keyNavigation: false,
     AnchorSettings: {
       anchorClickable: true, 
@@ -37,14 +39,23 @@ export class AppComponent {
 
   };
 
-  languages: any = ['English', 'فارسی']
-  constructor(private ngWizardService: NgWizardService, private store: Store<{ count: number }>) {
-    this.count$ = store.pipe(select('count'));
+  languages: any = ['English', 'فارسی'];
+  countries: any = ['English', 'Iran']
+  constructor(private ngWizardService: NgWizardService, private store: Store) {
+    console.log("store is:", this.store)
+    //@ts-ignore
+    // this.count$ = store.pipe(select('count'));
+  
+    // this.data$ = store.pipe(select('dataForm'));
   }
   
+  ngOnInit() {
+
+  }
  
   stepChanged(args: StepChangedArgs) {
-    console.log("stepChanged",args.step);
+    
+    this.msg = null;
   }
   increment() {
     this.store.dispatch(increment());
@@ -62,6 +73,7 @@ export class AppComponent {
   }
   onSubmitStepOne(f: NgForm) {
     if(f.valid){
+      this.store.dispatch(saveData(f.value))
       this.ngWizardService.next();
     }else{
       this.msg ="Compelete all boxes!!!"
@@ -72,6 +84,17 @@ export class AppComponent {
   onSubmitStepTwo(f: NgForm) {
     console.log("two", f.value)
     if(f.valid){
+      this.store.dispatch(saveData(f.value))
+      this.ngWizardService.next();
+    }else{
+      this.msg ="Compelete all boxes!!!"
+    }
+
+  }
+  onSubmitStepThree(f: NgForm) {
+    console.log("three", f.value)
+    if(f.valid){
+      this.store.dispatch(saveData(f.value))
       this.ngWizardService.next();
     }else{
       this.msg ="Compelete all boxes!!!"

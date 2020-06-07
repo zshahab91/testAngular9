@@ -4,7 +4,14 @@
     
     <ng-wizard-step [title]="'Step 1'" [description]="'Project Details'">
       <div class="content-step">
-        <h2>Project Details</h2>
+        <button id="increment" (click)="increment()">Increment</button>
+
+<div>Current Count: {{ count$ | async }}</div>
+
+<button id="decrement" (click)="decrement()">Decrement</button>
+
+<button id="reset" (click)="reset()">Reset Counter</button>
+        <!-- <h2>Project Details</h2>
         <div *ngIf="msg !== null" class="red">{{msg}}</div>
         <form #formStepOne="ngForm" (ngSubmit)="onSubmitStepOne(formStepOne)" novalidate>
           
@@ -88,7 +95,7 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="emailAddress" class="col-sm-2 col-form-label"
+            <label for="emailAddress1" class="col-sm-2 col-form-label"
               >Email Address</label
             >
             <div class="input-group col-sm-10">
@@ -100,13 +107,13 @@
               <input
                 type="email"
                 class="form-control"
-                id="emailAddress"
+                id="emailAddress1"
                 placeholder=""
-                name="emailAddress"
+                name="emailAddress1"
                 ngModel
                 required
                 minlength="1"
-                #emailAddress="ngModel"
+                #emailAddress1="ngModel"
                 [email]="true"
               />
             </div>
@@ -130,7 +137,7 @@
             </div>
           </div>
           <button class="btn btn-info right">NEXT STEP</button>
-        </form>
+        </form> -->
       </div>
     </ng-wizard-step>
 
@@ -188,7 +195,7 @@
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="email"
                 name="communicationTypeEmail"
                 ngModel
-                required
+                
                 #communicationTypeEmail="ngModel">
                 <label class="form-check-label" for="inlineCheckbox1">Email</label>
               </div>
@@ -196,7 +203,7 @@
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="sms"
                 name="communicationTypeSMS"
                 ngModel
-                required
+                
                 #communicationTypeSMS="ngModel">
                 <label class="form-check-label" for="inlineCheckbox2">SMS</label>
               </div>
@@ -204,7 +211,7 @@
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="phone" 
                 name="communicationTypePhone"
                 ngModel
-                required
+                
                 #communicationTypePhone="ngModel">
                 <label class="form-check-label" for="inlineCheckbox3">Phone</label>
               </div>
@@ -217,11 +224,151 @@
     </ng-wizard-step>
 
     <ng-wizard-step [title]="'Step 3'" [description]="'Delivery Details'">
-      <span>Step 3 content</span>
+      <div class="content-step">
+        <h2>Setup Your Address</h2>
+        <div *ngIf="msg !== null" class="red">{{msg}}</div>
+        <form #formStepThree="ngForm" (ngSubmit)="onSubmitStepThree(formStepThree)" novalidate>
+          
+          <div class="form-group row">
+            <label for="addressLine1" class="col-sm-2 col-form-label"
+              >Address Line1</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="addressLine1"
+                placeholder=""
+                name="addressLine1"
+                ngModel
+                required
+                minlength="1"
+                #addressLine1="ngModel"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="addressLine2" class="col-sm-2 col-form-label"
+              >Address Line2</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="addressLine2"
+                placeholder=""
+                name="addressLine2"
+                ngModel
+                required
+                minlength="1"
+                #addressLine2="ngModel"
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group row">
+                <label for="postCode" class="col-sm-12 col-form-label"
+                  >Postcode</label
+                >
+                <div class="col-sm-12">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="postCode"
+                    placeholder=""
+                    name="postCode"
+                    ngModel
+                    required
+                    minlength="1"
+                    maxlength="10"
+                    #postCode="ngModel"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group row">
+                <label for="city" class="col-sm-12 col-form-label"
+                  >City</label
+                >
+                <div class="col-sm-12">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="city"
+                    placeholder=""
+                    name="city"
+                    ngModel
+                    required
+                    minlength="1"
+                    #city="ngModel"
+                  />
+                </div>
+              </div>
+            </div>
+
+           
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group row">
+                <label for="state" class="col-sm-12 col-form-label"
+                  >State</label
+                >
+                <div class="col-sm-12">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="state"
+                    placeholder=""
+                    name="state"
+                    ngModel
+                    required
+                    minlength="1"
+                    maxlength="10"
+                    #state="ngModel"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group row">
+                <label for="country" class="col-sm-12 col-form-label"
+                  >Country</label
+                >
+                <div class="col-sm-12">
+                  <select class="form-control"
+                  name="country"
+                  ngModel
+                  required
+                  #country="ngModel"
+                  >
+                    <option disabled>Select Country</option>
+                    <option *ngFor="let ln of countries">{{ln}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+           
+          </div>
+          <button class="btn btn-secondary left" (click)="goPrevious">PREVIOUS</button>
+   
+          <button class="btn btn-info right">NEXT STEP</button>
+        </form>
+      </div>
     </ng-wizard-step>
 
     <ng-wizard-step [title]="'Step 4'" [description]="'Review and Submit'">
-      <span>Step 4 content</span>
+      <div class="content-step">
+        <h2>Review And Submit</h2>
+        <pre>{{data$}}</pre>
+        <button class="btn btn-secondary left" (click)="goPrevious">PREVIOUS</button>
+ 
+        <button class="btn btn-info right">NEXT STEP</button>
+      </div>
     </ng-wizard-step>
   </ng-wizard>
 </div>
