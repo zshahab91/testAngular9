@@ -1,6 +1,7 @@
 .main-container{
-    margin: 250px auto;
+    margin: 100px auto;
     padding: 0;
+    line-height: 2em;
 }
 .hidden{
     display: none;
@@ -19,4 +20,23 @@
 }
 .left{
     float: left;
+}
+.bold{
+    font-weight: bold; 
+}
+.bolder{
+    font-weight: bolder;
+    margin: 10px 0;
+}
+.box{
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px;
+    margin: 20px 0;
+}
+.table{
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+.table th, .table td{
+    text-align: center;
 }

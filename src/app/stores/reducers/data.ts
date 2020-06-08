@@ -1,26 +1,27 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { saveData, reset } from '../actions/data';
-import { state } from '@angular/animations';
-export interface State {
-  dataForm: object;
-  allData: [];
-}
-export const initialState: State = {
-  dataForm: {},
-  allData: []
-};
+import { saveData, submitData } from '../actions/data';
+
+
+export const initialState = {};
 
 const _dataReducer = createReducer(initialState,
   //@ts-ignore
   on(saveData, (state, action) => {
-    let oldData = state.dataForm;
-    let newData = { ...oldData, ...action }
-    return { ...state, dataForm: newData }
+    let oldData = state;
+    return state = { ...oldData, ...action }
   }
   ),
-  on(reset, state => ({ ...state, dataForm: {} })),
+  on(submitData, (state, action) => {
+    let newData = state;
+    let allData = JSON.parse(localStorage.getItem("list_projects")) !== null  ? JSON.parse(localStorage.getItem("list_projects")) : [];
+    allData.push(newData);
+    localStorage.setItem("list_projects", JSON.stringify(allData));
+    return state 
+  }
+  ),
+
 );
 
-export function dataReducer(state: State | undefined, action: Action) {
+export function dataReducer(state, action: Action) {
   return _dataReducer(state, action);
 }

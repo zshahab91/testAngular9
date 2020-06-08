@@ -3,8 +3,8 @@ import { NgWizardConfig, THEME, StepChangedArgs, NgWizardService } from 'ng-wiza
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import { increment, decrement, reset } from './stores/actions/counter';
-import { saveData } from './stores/actions/data';
+
+import { saveData, submitData } from './stores/actions/data';
 import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-root',
@@ -17,9 +17,10 @@ export class AppComponent {
   isCompeleteStepOne: boolean = false;
   isCompeleteStepTwo: boolean = false;
   isCompeleteStepThree: boolean = false;
+  showTable: boolean = false;
 
-  count$: Observable<number>;
-  data$: Observable<null>;
+  dataForm;
+  allData = [];
   config = {
     selected: 0,
     keyNavigation: false,
@@ -41,33 +42,15 @@ export class AppComponent {
 
   languages: any = ['English', 'فارسی'];
   countries: any = ['English', 'Iran']
-  constructor(private ngWizardService: NgWizardService, private store: Store) {
-    console.log("store is:", this.store)
-    //@ts-ignore
-    // this.count$ = store.pipe(select('count'));
-  
-    // this.data$ = store.pipe(select('dataForm'));
+  constructor(private ngWizardService: NgWizardService, private store: Store<{ data: object }>) {
+      this.dataForm = this.store.select('data');
   }
-  
-  ngOnInit() {
 
-  }
  
   stepChanged(args: StepChangedArgs) {
-    
     this.msg = null;
   }
-  increment() {
-    this.store.dispatch(increment());
-  }
  
-  decrement() {
-    this.store.dispatch(decrement());
-  }
- 
-  reset() {
-    this.store.dispatch(reset());
-  }
   goPrevious(){
     this.ngWizardService.previous();
   }
@@ -82,7 +65,6 @@ export class AppComponent {
 
   }
   onSubmitStepTwo(f: NgForm) {
-    console.log("two", f.value)
     if(f.valid){
       this.store.dispatch(saveData(f.value))
       this.ngWizardService.next();
@@ -92,7 +74,6 @@ export class AppComponent {
 
   }
   onSubmitStepThree(f: NgForm) {
-    console.log("three", f.value)
     if(f.valid){
       this.store.dispatch(saveData(f.value))
       this.ngWizardService.next();
@@ -100,6 +81,11 @@ export class AppComponent {
       this.msg ="Compelete all boxes!!!"
     }
 
+  }
+  saveDataLocalStorage() {
+    this.store.dispatch(submitData());
+    this.allData = JSON.parse(localStorage.getItem("list_projects")) !== null  ? JSON.parse(localStorage.getItem("list_projects")) : [];
+    this.showTable = true;
   }
 
 }

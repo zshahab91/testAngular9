@@ -1,143 +1,138 @@
 <div class="container main-container">
-  <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
+  <ng-wizard  *ngIf="!showTable" [config]="config" (stepChanged)="stepChanged($event)">
 
     
     <ng-wizard-step [title]="'Step 1'" [description]="'Project Details'">
       <div class="content-step">
-        <button id="increment" (click)="increment()">Increment</button>
-
-<div>Current Count: {{ count$ | async }}</div>
-
-<button id="decrement" (click)="decrement()">Decrement</button>
-
-<button id="reset" (click)="reset()">Reset Counter</button>
-        <!-- <h2>Project Details</h2>
+        <h2>Project Details</h2>
         <div *ngIf="msg !== null" class="red">{{msg}}</div>
-        <form #formStepOne="ngForm" (ngSubmit)="onSubmitStepOne(formStepOne)" novalidate>
-          
-          <div class="form-group row">
-            <label for="projectName" class="col-sm-2 col-form-label"
-              >Project Name</label
-            >
-            <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="projectName"
-                placeholder=""
-                name="projectName"
-                ngModel
-                required
-                minlength="1"
-                #projectName="ngModel"
-              />
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="projectOwner" class="col-sm-2 col-form-label"
-              >Project Owner</label
-            >
-            <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="projectOwner"
-                placeholder=""
-                name="projectOwner"
-                ngModel
-                required
-                minlength="1"
-                #projectOwner="ngModel"
-              />
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="customerName" class="col-sm-2 col-form-label"
-              >Customer Name</label
-            >
-            <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="customerName"
-                placeholder=""
-                name="customerName"
-                ngModel
-                required
-                minlength="1"
-                #customerName="ngModel"
-              />
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="contactPhone" class="col-sm-2 col-form-label"
-              >Contact Phone</label
-            >
-            <div class="input-group col-sm-10">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
-                  <fa-icon [icon]="faPhone"></fa-icon>
-                </div>
+        <form #formStepOne="ngForm" (ngSubmit)="onSubmitStepOne(formStepOne)" novalidate  >
+          <div ngModelGroup="Project_Details">
+            <div class="form-group row">
+              <label for="projectName" class="col-sm-2 col-form-label"
+                >Project Name</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="projectName"
+                  placeholder=""
+                  name="projectName"
+                  ngModel
+                  required
+                  minlength="1"
+                  #projectName="ngModel"
+                />
               </div>
-              <input
-                type="text"
-                class="form-control"
-                id="contactPhone"
-                placeholder=""
-                name="contactPhone"
-                ngModel
-                required
-                minlength="11"
-                maxLength="11"
-                #contactPhone="ngModel"
-              />
             </div>
-          </div>
-          <div class="form-group row">
-            <label for="emailAddress1" class="col-sm-2 col-form-label"
-              >Email Address</label
-            >
-            <div class="input-group col-sm-10">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
-                  @
-                </div>
+  
+            <div class="form-group row">
+              <label for="projectOwner" class="col-sm-2 col-form-label"
+                >Project Owner</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="projectOwner"
+                  placeholder=""
+                  name="projectOwner"
+                  ngModel
+                  required
+                  minlength="1"
+                  #projectOwner="ngModel"
+                />
               </div>
-              <input
-                type="email"
-                class="form-control"
-                id="emailAddress1"
-                placeholder=""
-                name="emailAddress1"
-                ngModel
-                required
-                minlength="1"
-                #emailAddress1="ngModel"
-                [email]="true"
-              />
+            </div>
+            <div class="form-group row">
+              <label for="customerName" class="col-sm-2 col-form-label"
+                >Customer Name</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="customerName"
+                  placeholder=""
+                  name="customerName"
+                  ngModel
+                  required
+                  minlength="1"
+                  #customerName="ngModel"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="contactPhone" class="col-sm-2 col-form-label"
+                >Contact Phone</label
+              >
+              <div class="input-group col-sm-10">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <fa-icon [icon]="faPhone"></fa-icon>
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="contactPhone"
+                  placeholder=""
+                  name="contactPhone"
+                  ngModel
+                  required
+                  minlength="11"
+                  maxLength="11"
+                  #contactPhone="ngModel"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="emailAddress1" class="col-sm-2 col-form-label"
+                >Email Address</label
+              >
+              <div class="input-group col-sm-10">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    @
+                  </div>
+                </div>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="emailAddress1"
+                  placeholder=""
+                  name="emailAddress1"
+                  ngModel
+                  required
+                  minlength="1"
+                  #emailAddress1="ngModel"
+                  [email]="true"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="companySite" class="col-sm-2 col-form-label"
+                >Company Site</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="companySite"
+                  placeholder=""
+                  name="companySite"
+                  ngModel
+                  required
+                  minlength="1"
+                  #companySite="ngModel"
+                />
+              </div>
             </div>
           </div>
-          <div class="form-group row">
-            <label for="companySite" class="col-sm-2 col-form-label"
-              >Company Site</label
-            >
-            <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="companySite"
-                placeholder=""
-                name="companySite"
-                ngModel
-                required
-                minlength="1"
-                #companySite="ngModel"
-              />
-            </div>
-          </div>
+        
           <button class="btn btn-info right">NEXT STEP</button>
-        </form> -->
+        </form>
       </div>
     </ng-wizard-step>
 
@@ -146,6 +141,8 @@
         <h2>Project Settings</h2>
         <div *ngIf="msg !== null" class="red">{{msg}}</div>
         <form #formStepTwo="ngForm" (ngSubmit)="onSubmitStepTwo(formStepTwo)" novalidate>
+          <div ngModelGroup="Project_Settings">
+     
           <div class="form-group row">
             <label for="emailAddress" class="col-sm-2 col-form-label"
               >Email Address</label
@@ -193,31 +190,29 @@
             <div class="col-sm-10">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="email"
-                name="communicationTypeEmail"
+                name="Email"
                 ngModel
-                
-                #communicationTypeEmail="ngModel">
+                #Email="ngModel">
                 <label class="form-check-label" for="inlineCheckbox1">Email</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="sms"
-                name="communicationTypeSMS"
+                name="SMS"
                 ngModel
-                
-                #communicationTypeSMS="ngModel">
+                #SMS="ngModel">
                 <label class="form-check-label" for="inlineCheckbox2">SMS</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="phone" 
-                name="communicationTypePhone"
+                name="Phone"
                 ngModel
-                
-                #communicationTypePhone="ngModel">
+                #Phone="ngModel">
                 <label class="form-check-label" for="inlineCheckbox3">Phone</label>
               </div>
             </div>
           </div>
-          <button class="btn btn-secondary left" (click)="goPrevious">PREVIOUS</button>
+          </div>
+          <button class="btn btn-secondary left" (click)="goPrevious()">PREVIOUS</button>
           <button class="btn btn-info right">NEXT STEP</button>
         </form>
       </div>
@@ -228,7 +223,7 @@
         <h2>Setup Your Address</h2>
         <div *ngIf="msg !== null" class="red">{{msg}}</div>
         <form #formStepThree="ngForm" (ngSubmit)="onSubmitStepThree(formStepThree)" novalidate>
-          
+          <div ngModelGroup="Setup_Your_Address">
           <div class="form-group row">
             <label for="addressLine1" class="col-sm-2 col-form-label"
               >Address Line1</label
@@ -327,7 +322,6 @@
                     ngModel
                     required
                     minlength="1"
-                    maxlength="10"
                     #state="ngModel"
                   />
                 </div>
@@ -354,7 +348,9 @@
 
            
           </div>
-          <button class="btn btn-secondary left" (click)="goPrevious">PREVIOUS</button>
+          </div>
+
+          <button class="btn btn-secondary left" (click)="goPrevious()">PREVIOUS</button>
    
           <button class="btn btn-info right">NEXT STEP</button>
         </form>
@@ -363,12 +359,58 @@
 
     <ng-wizard-step [title]="'Step 4'" [description]="'Review and Submit'">
       <div class="content-step">
-        <h2>Review And Submit</h2>
-        <pre>{{data$}}</pre>
-        <button class="btn btn-secondary left" (click)="goPrevious">PREVIOUS</button>
+        <h2>Review your Details and Submit</h2>
+        <div *ngIf="dataForm | async as p">
+          <div *ngFor="let item of p | keyvalue">
+            <div *ngIf="item.key !== 'type'" class="box">
+                <div  class="bolder" >{{item.key}}</div> 
+                <div *ngFor="let itm of item.value | keyvalue">
+                  <span class="bold">{{itm.key}}</span> : {{itm.value.length === 0 ? 'false' : itm.value}}
+                </div>
+              </div>
+           
+          </div>
+        </div>
+
+        <button class="btn btn-secondary left" (click)="goPrevious()">PREVIOUS</button>
  
-        <button class="btn btn-info right">NEXT STEP</button>
+        <button class="btn btn-success right" (click)="saveDataLocalStorage()">Submit</button>
       </div>
     </ng-wizard-step>
   </ng-wizard>
 </div>
+    <div class="show-table container-fluid" *ngIf="showTable">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <slot *ngFor="let select of allData " >
+            <slot *ngFor="let header of select | keyvalue">
+              <slot  *ngIf="header.key.includes('Project')">
+
+                <th *ngFor="let head of header.value | keyvalue">
+                  {{head.key}}
+                </th>
+              </slot>
+            </slot>
+  
+          </slot>
+         
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let select of allData " >
+            <slot *ngFor="let header of select | keyvalue">
+              <slot *ngIf="header.key.includes('Project')">
+                <td *ngFor="let head of header.value | keyvalue" >
+                  {{head.value.length === 0 ? 'false' : head.value}}
+                </td>
+              </slot>
+              
+            </slot>
+  
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+
